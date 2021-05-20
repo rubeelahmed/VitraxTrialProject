@@ -1,0 +1,84 @@
+﻿@model  Viatrax_Trial_Project.Controllers.DeviceListingViewModel
+@{
+    ViewBag.Title = "Viatrax Trial Project";
+    var DeviceList = ViewBag.DeviceList;
+    var i = 0;
+}
+
+<div class="jumbotron ">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Device Listing</h2>
+            <button class="btn btn-primary" type="button" onclick="window.location.href = '/Home/deviceListingDetails'"> Device Listing</button>
+        </div>
+
+    </div>
+    <br />
+    @if (ViewBag.DeviceList != null)
+    {
+        <div class="row">
+            <div class=col-md-12>
+
+                <table class="table" id="CustomerGrid">
+                    <tr>
+
+
+                        <th style="text-align:center">DiviceID</th>
+                        <th style="text-align:center">KeyCode</th>
+                        <th style="text-align:center">Last Report Time</th>
+                        <th style="text-align:center">GPS Coordinates</th>
+                        <th style="text-align:center">Voltage </th>
+
+
+                    </tr>
+
+                    @foreach (var item in DeviceList.data)
+                    {
+                <tr>
+                    @*data-toggle="modal" data-target="#deviceDetailsModal"*@
+                    <td style="text-align:center">@(DeviceList.data[@i].deviceId)</td>
+                <td style="text-align:center">
+                 @Html.ActionLink((string)DeviceList.data[@i].consumerKey, "DeviceDetails", "Home", new { KeyCode = @DeviceList.data[@i].consumerKey , IMEI = @DeviceList.data[@i].imei  , Voltage = @DeviceList.data[@i].LastReportVoltage }, null)
+                </td>
+                    <td style="text-align:center">@(DeviceList.data[@i].LastReportUpdateTime == "" ? "" : "-")</td>
+                    <td style="text-align:center">@(DeviceList.data[@i].LastReportLatitude)  ,  @(DeviceList.data[@i].LastReportLongitude)</td>
+                    <td style="text-align:center">@(DeviceList.data[@i].LastReportVoltage)</td>
+
+                </tr>
+
+                        i++;
+                    }
+
+                </table>
+
+            </div>
+        </div>
+    }
+
+
+    <!-- Modal -->
+    <div id="deviceDetailsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Device Details</h4>
+                </div>
+                <div class="modal-body">
+                    <h2>Modal Body .....</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        function openModal(e) {
+
+          $('#deviceDetailsModal').modal('show');
+        }
+    </script>
