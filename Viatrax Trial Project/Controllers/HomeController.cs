@@ -20,8 +20,8 @@ namespace Viatrax_Trial_Project.Controllers
 
         public ActionResult deviceListingDetails()
         {
-  
-            //Object
+
+            //Send Request Object to get Device Listing
             var myRequestData = new
             {
                 commandstring = "get_devices",
@@ -70,14 +70,23 @@ namespace Viatrax_Trial_Project.Controllers
 
         public ActionResult DeviceDetails(string KeyCode , string IMEI , float Voltage)
         {
+            //Store Data into Session
+            if(KeyCode!= "" && IMEI != "")
+            {
+                Session["KeyCode"] = KeyCode;
+                Session["IMEI"] = IMEI;
+                Session["Voltage"] = Voltage;
+            }
+
+           
 
 
             //Send Request Object to get Report
             var myRequestData = new {
                 commandstring = "get_reports_single_device",
                 identifier = IMEI,
-                datetime_start = "02/20/2016 00:00:00",
-                datetime_end = "02/22/2021 00:00:00",
+                datetime_start = "05/19/2021 00:00:00",
+                datetime_end = "05/20/2021 00:00:00",
                 coredataonly = true,
                 token = "d1b95a4c22f546faa851a8961e0d20f9"
             };
@@ -107,11 +116,11 @@ namespace Viatrax_Trial_Project.Controllers
                     // Read the content.
                     responseFromServer = reader.ReadToEnd();
 
-                    //Deserialize Object Data into DeviceListingViewModel
-                    DeviceListingViewModel tmp = JsonConvert.DeserializeObject<DeviceListingViewModel>(responseFromServer);
-                    ViewData["DeviceList"] = tmp;
+                    //Deserialize Object Data into ReportsListingViewModel
+                    ReportsListingViewModel tmp = JsonConvert.DeserializeObject<ReportsListingViewModel>(responseFromServer);
+                    ViewData["ReportsList"] = tmp;
 
-                    return View("Index");
+                    return View("DeviceDetails");
 
                 }
             }
@@ -120,7 +129,7 @@ namespace Viatrax_Trial_Project.Controllers
                 return Json(httpResponse.StatusDescription, JsonRequestBehavior.AllowGet);
             }
 
-            return View("Index");
+          //  return View("DeviceDetails");
         }
 
     }
@@ -167,6 +176,15 @@ namespace Viatrax_Trial_Project.Controllers
 
     }
 
+    public class ReportsListingViewModel
+    {
+        public string CommandString { get; set; }
+        public string timestamp { get; set; }
+        public string rate_limit_stats { get; set; }
+        public List<ReportsViewModel> data { get; set; }
+
+
+    }
 
     public class ReportsViewModel
     {
