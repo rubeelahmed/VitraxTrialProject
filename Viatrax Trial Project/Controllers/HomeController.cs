@@ -15,10 +15,12 @@ namespace Viatrax_Trial_Project.Controllers
     {
         public ActionResult Index()
         {
+            DeviceListingDetails();
             return View();
         }
 
-        public ActionResult deviceListingDetails()
+        //Populate Data on Device Listing Screen(Home-Screen)
+        public ActionResult DeviceListingDetails()
         {
 
             //Send Request Object to get Device Listing
@@ -69,6 +71,7 @@ namespace Viatrax_Trial_Project.Controllers
          
         }
 
+        //Populate Data on Device Details Screen 
         public ActionResult DeviceDetails(string KeyCode , string IMEI , float Voltage)
         {
             //Store Data into Session
@@ -134,6 +137,7 @@ namespace Viatrax_Trial_Project.Controllers
           
         }
 
+        //Populate Data while Searching using Device ID or IMEI# on Listing Screen(Home-Screen)
         public ActionResult Search(string DeviceID)
         {
 
