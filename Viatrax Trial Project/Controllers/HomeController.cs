@@ -56,16 +56,17 @@ namespace Viatrax_Trial_Project.Controllers
                     //Deserialize Object Data into DeviceListingViewModel
                     DeviceListingViewModel tmp = JsonConvert.DeserializeObject<DeviceListingViewModel>(responseFromServer);
                     ViewData["DeviceList"] = tmp;
-                   
+
+
                     return View("Index");
 
                 }
             }
             else
             {
-                return Json(httpResponse.StatusDescription , JsonRequestBehavior.AllowGet);
+                 return View("Error");
             }
-           // return View();
+         
         }
 
         public ActionResult DeviceDetails(string KeyCode , string IMEI , float Voltage)
@@ -126,10 +127,71 @@ namespace Viatrax_Trial_Project.Controllers
             }
             else
             {
-                return Json(httpResponse.StatusDescription, JsonRequestBehavior.AllowGet);
+               
+                return View("Error");
             }
 
-          //  return View("DeviceDetails");
+          
+        }
+
+        public ActionResult Search(string DeviceID)
+        {
+
+            if (DeviceID != "")
+            {
+                //Send Request Object to get Device Listing
+                var myRequestData = new
+                {
+                    commandstring = "get_device",
+                    token = "d1b95a4c22f546faa851a8961e0d20f9",
+                    identifier = DeviceID
+                };
+
+                string responseFromServer = "";
+                //Tranform it to Json object
+                string jsonData = JsonConvert.SerializeObject(myRequestData);
+
+                //Create a web Request to a given Url
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://gps.trak-4.com/api/v2/");
+                httpWebRequest.ContentType = "text/json";
+                httpWebRequest.Method = "POST";
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    streamWriter.Write(jsonData);
+                    streamWriter.Flush();
+                }
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                if (httpResponse.StatusDescription == "OK")
+                {
+                    // Open a Stream to Get Resposne Stream.
+                    using (Stream dataStream = httpResponse.GetResponseStream())
+                    {
+                        // Open the stream using a StreamReader for easy access.
+                        StreamReader reader = new StreamReader(dataStream);
+                        // Read the content.
+                        responseFromServer = reader.ReadToEnd();
+
+                        //Deserialize Object Data into DeviceListingViewModel
+                        DeviceListingViewModel tmp = JsonConvert.DeserializeObject<DeviceListingViewModel>(responseFromServer);
+                        ViewData["DeviceList"] = tmp;
+
+                        return View("Index");
+
+                    }
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            else
+            {
+
+                //  RedirectToRoute()
+                // return Content("<script language='javascript' type='text/javascript'>alert('Enter Device ID or IMEI in TextBox....!!!');</script>");
+                return RedirectToAction("deviceListingDetails", "Home", new { area = "" });
+            }
         }
 
     }
@@ -139,7 +201,7 @@ namespace Viatrax_Trial_Project.Controllers
         public string CommandString { get; set; }
         public string timestamp { get; set; }
         public string  rate_limit_stats { get; set; }
-        public List<DataViewModel> data { get; set; }
+        public DataViewModel [] data { get; set; }
       
 
     }
@@ -158,6 +220,7 @@ namespace Viatrax_Trial_Project.Controllers
         public float LastReportLatitude { get; set; }
         public float LastReportLongitude { get; set; }
         public string LastReportUpdateTime { get; set; }
+        public string LastReportReceivedTime { get; set; }
         public float LastReportVoltage { get; set; }
         public string customerLabel { get; set; }
         public  string consumerLabel { get; set; }

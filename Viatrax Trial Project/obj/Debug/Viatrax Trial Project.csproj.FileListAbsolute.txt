@@ -160,3 +160,7 @@ C:\Users\MST-WS-022\Documents\GitHub2\VitraxTrialProject\Viatrax Trial Project\o
 C:\Users\MST-WS-022\Documents\GitHub2\VitraxTrialProject\Viatrax Trial Project\obj\Debug\Viatrax Trial Project.csproj.CopyComplete
 C:\Users\MST-WS-022\Documents\GitHub2\VitraxTrialProject\Viatrax Trial Project\obj\Debug\Viatrax Trial Project.dll
 C:\Users\MST-WS-022\Documents\GitHub2\VitraxTrialProject\Viatrax Trial Project\obj\Debug\Viatrax Trial Project.pdb
+C:\Users\MST-WS-022\Documents\GitHub2\VitraxTrialProject\Viatrax Trial Project\bin\PagedList.dll
+C:\Users\MST-WS-022\Documents\GitHub2\VitraxTrialProject\Viatrax Trial Project\bin\PagedList.Mvc.dll
+C:\Users\MST-WS-022\Documents\GitHub2\VitraxTrialProject\Viatrax Trial Project\bin\PagedList.xml
+C:\Users\MST-WS-022\Documents\GitHub2\VitraxTrialProject\Viatrax Trial Project\bin\PagedList.Mvc.xml
