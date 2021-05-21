@@ -16,7 +16,7 @@ namespace Viatrax_Trial_Project
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "deviceListingDetails", id = UrlParameter.Optional }
             );
         }
     }

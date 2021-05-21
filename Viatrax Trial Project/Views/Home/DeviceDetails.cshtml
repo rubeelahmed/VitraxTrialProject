@@ -61,7 +61,7 @@
 
 
                         <th style="text-align:center">Time</th>
-                        <th style="text-align:center">Gps Coordinates</th>
+                        <th style="text-align:center">Gps Coordinates(Log , Lat)</th>
                         <th style="text-align:center">Voltage </th>
                         <th style="text-align:center">Speed</th>
                         <th style="text-align:center">Heading</th>
@@ -70,18 +70,34 @@
 
                     @foreach (var item in ReportsList.data)
                     {
-                        <tr>
+                <tr>
 
-                            <td style="text-align:center">@(ReportsList.data[@i].updateTime )</td>
-                            @*<td style="text-align:center">
-                                    @Html.ActionLink((string)ReportsList.data[@i].consumerKey, "DeviceDetails", "Home", new { KeyCode = @ReportsList.data[@i].consumerKey, IMEI = @ReportsList.data[@i].imei, Voltage = @ReportsList.data[@i].LastReportVoltage }, null)
-                                </td>*@
-                            <td style="text-align:center">@(ReportsList.data[@i].longitude)  ,  @(ReportsList.data[@i].longitude)</td>
-                            <td style="text-align:center">@(ReportsList.data[@i].voltage1)</td>
-                            <td style="text-align:center">@(ReportsList.data[@i].GPS_speed)</td>
-                            <td style="text-align:center">@(ReportsList.data[@i].GPS_heading)</td>
+                    <td style="text-align:center">@(ReportsList.data[@i].updateTime )</td>
 
-                        </tr>
+                    <td style="text-align:center">
+                     
+                        @Html.ActionLink((string)ReportsList.data[@i].longitude, "ShowDeviceLocationOnMap", "GoogleMap", new
+                    {
+                        longitude = @ReportsList.data[@i].longitude,
+                        latitude = @ReportsList.data[@i].latitude
+
+                    }, null)
+                        ,
+
+                        @Html.ActionLink((string)ReportsList.data[@i].latitude, "ShowDeviceLocationOnMap", "GoogleMap", new
+                   {
+                       longitude = @ReportsList.data[@i].longitude,
+                       latitude = @ReportsList.data[@i].latitude
+
+                   }, null)
+
+                    </td>
+
+                    <td style="text-align:center">@(ReportsList.data[@i].voltage1)</td>
+                    <td style="text-align:center">@(ReportsList.data[@i].GPS_speed)</td>
+                    <td style="text-align:center">@(ReportsList.data[@i].GPS_heading)</td>
+
+                </tr>
 
                         i++;
                     }
@@ -91,5 +107,5 @@
             </div>
         </div>
     }
-
+    </div>
 

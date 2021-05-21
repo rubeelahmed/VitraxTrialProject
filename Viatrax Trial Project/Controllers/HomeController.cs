@@ -258,7 +258,7 @@ namespace Viatrax_Trial_Project.Controllers
         public string receivedDate  { get; set; }
         public string updateTime { get; set; }
         public string longitude { get; set; }
-        public bool latitude { get; set; }
+        public string latitude { get; set; }
         public float voltage1 { get; set; }
         public float temp1 { get; set; }
         public bool GPS_isCellTower { get; set; }
