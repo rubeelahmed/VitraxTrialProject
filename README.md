@@ -65,5 +65,9 @@ and download the zip and embed it into your git by creating a new repository
    https://docs.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio
 4. Go to ->Viatrax Trial Project\Controllers\HomeController.cs and open the HomeController.cs 
 5. Run the project
+6. You'll be Redirected to Home Screen
+
+![image](https://user-images.githubusercontent.com/84393770/119324691-8d34d480-bc99-11eb-84e1-80fbb54e9d74.png)
+
 
 </snippet>
