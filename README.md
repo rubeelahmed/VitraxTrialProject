@@ -1,14 +1,14 @@
 <snippet>
   <content><![CDATA[
-# ${1:ViTrax Trial Project}
+## ${1:ViTrax Trial Project}
 
-## Project Description: 
+## 
+## Project Description
 
 * Trak-4 is a GPS tracking service with a REST API. 
    -Trak4 API - Command: Get Devices
    -Trak4 API - Command: Get Device
    -Trak4 API - Command: Get Reports - Single Device
-
 * We will use the Trak-4 API to 
 (A) populate a device listing screen and 
 (B) populate a device details screen.
